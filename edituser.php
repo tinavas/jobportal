@@ -24,7 +24,7 @@ require_once('uploadvars.php');
   echo "ok";
   mysql_select_db(DB_NAME);
 echo "good";
-  if (isset($_POST['submit'])) 
+ if (isset($_POST['submit'])) 
   {
     echo "v good";
     // Grab the profile data from the POST
@@ -32,39 +32,24 @@ echo "good";
     $last_name = mysql_real_escape_string(trim($_POST['lastname']),$dbc);
     $gender = mysql_real_escape_string(trim($_POST['gender']),$dbc);
     $birthdate = mysql_real_escape_string(trim($_POST['dob']),$dbc);
+    //$level= mysql_real_escape_string(trim($_POST['experience']),$dbc);
     $phone=mysql_real_escape_string(trim($_POST['phone']),$dbc);
     $currentloc=mysql_real_escape_string(trim($_POST['city']),$dbc);
     $expyear=mysql_real_escape_string(trim($_POST['expyear']),$dbc);
     $expmonth=mysql_real_escape_string(trim($_POST['expmonth']),$dbc);
-    
-    //$new_picture = mysql_real_escape_string(trim($_FILES['new_picture']['name']),$dbc);
-   // $new_picture_type = $_FILES['new_picture']['type'];
-    //$new_picture_size = $_FILES['new_picture']['size'];
-   
-/*for($i=0;$i<count($_POST['institute']);$i++)
-{
-    $sql = "UPDATE register_emp SET
-               colg = ". $_POST['institute'][$i].", degree = ". $_POST['degree'][$i]." WHERE ID='" . $_SESSION['ID'] . "'";
-    mysql_query($sql,$dbc) or die(mysql_error());        
-}*/
-
     $error = false;
-    //update profile data in database
-    if (!$error) {
+     if (!$error) {
      // if (!empty($first_name) && !empty($last_name) && !empty($gender) && !empty($birthdate) && !empty($level)) {
         
           $query = "UPDATE register_emp SET firstname = '$first_name', lastname = '$last_name', gender = '$gender', " .
-            " birthdate = '$birthdate',city='$currentloc',phone='$phone',expyear='$expyear',expmonth='$expmonth' WHERE ID = '" . $_SESSION['ID'] . "'";
+            " birthdate = '$birthdate',phone='$level',city='$currentloc',expyear='$expyear',expmonth='$expmonth' WHERE ID = '" . $_SESSION['ID'] . "'";
         
        // else echo 'FIll all fields';
        
         mysql_query($query,$dbc) or die(mysql_error());
 
         // Confirm success with the user
-       // echo '<p>Your profile has been successfully updated.<a href="viewprofile.php">view your profile</a> or <a href="addedu.php">add educational details</a></p>';
-        //echo '<script type="text/javascript">
-          // window.location = "edudetails.php"
-     // </script>';
+      echo '<p>Your profile has been successfully updated.<a href="viewprofile.php">view your profile</a> or <a href="addedu.php">add educational details</a></p>';
 
         mysql_close();
         exit();
@@ -72,11 +57,10 @@ echo "good";
       else {
         echo '<p class="error">You must enter all of the profile data (the picture is optional).</p>';
       }
-
-  } // End of check for form submission
-else {
+    }
+  else {
     // Grab the profile data from the database
-    $query = "SELECT firstname, lastname, gender, birthdate,city,phone,expyear,expmonth FROM register_emp WHERE ID = '" . $_SESSION['ID'] . "'";
+    $query = "SELECT firstname, lastname, gender, birthdate,userlevel FROM register_emp WHERE ID = '" . $_SESSION['ID'] . "'";
     $data = mysql_query($query,$dbc) or die('Error querying');
     $row = mysql_fetch_array($data);
 
@@ -85,12 +69,10 @@ else {
       $last_name = $row['lastname'];
       $gender = $row['gender'];
       $birthdate = $row['birthdate'];
-      $currentloc = $row['city'];
+      //$city = $row['city'];
       //$state = $row['state'];
       //$old_picture = $row['picture'];
-      //$level=$row['userlevel'];
-      $expyear=$row['expyear'];
-      $expmonth=$row['expmonth'];
+      $level=$row['userlevel'];
     }
     else {
       echo '<p class="error">There was a problem accessing your profile.</p>';
@@ -100,4 +82,4 @@ else {
   mysql_close();
 ?>
 
-
+  

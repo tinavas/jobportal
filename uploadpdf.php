@@ -10,7 +10,15 @@
 </table>
 </form>
 <?php
-$dbc=mysqli_connect('localhost','root','zxcv','jobseeker') or die('Database Connection error');
+session_start();
+if (!isset($_SESSION['ID'])) {
+    if (isset($_COOKIE['ID']) && isset($_COOKIE['email'])) {
+     // $_SESSION['user_id'] = $_COOKIE['user_id'];
+      //$_SESSION['username'] = $_COOKIE['username'];
+    }
+  }
+$dbc=mysql_connect('localhost','root','zxcv');
+mysql_select_db('jobseeker');
 
 if(isset($_POST['upload']) && $_FILES['userfile']['size'] > 0)
 {
@@ -30,12 +38,13 @@ if(!get_magic_quotes_gpc())
 }
 if($_FILES['userfile']['type']=="application/pdf") //uploads only pdf files
 {
-	$query = "UPDATE register_emp (cvname, cvsize, cvtype, cvcontent ) SET VALUES ('$fileName', '$fileSize', '$fileType', '$content') WHERE ID = '" . $_SESSION['ID'] . "'";
+	//$query = "UPDATE register_emp(cvname, cvsize, cvtype, cvcontent) SET VALUES ('$fileName', '$fileSize', '$fileType', '$content') WHERE ID = '" . $_SESSION['ID'] . "'";
+	$query="UPDATE register_emp SET cvname='$fileName',cvsize='$fileSize',cvtype='$fileType',cvcontent='$content' WHERE ID = '" . $_SESSION['ID'] . "'";
 //$query = "INSERT INTO upload (name, size, type, content ) ".
 //"VALUES ('$fileName', '$fileSize', '$fileType', '$content')";
 
-mysqli_query($dbc,$query) or die('Error, query failed'); 
-mysqli_close($dbc);
+mysql_query($query,$dbc) or die(mysql_error()); 
+mysql_close();
 
 echo "<br>File $fileName uploaded<br>";
 }

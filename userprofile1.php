@@ -1,61 +1,26 @@
 <html>
 <head>
-  <style type="text/css">
-body {
-    margin-top:40px;
-}
-.stepwizard-step p {
-    margin-top: 10px;
-}
-.stepwizard-row {
-    display: table-row;
-}
-.stepwizard {
-    display: table;
-    width: 50%;
-    position: relative;
-}
-.stepwizard-step button[disabled] {
-    opacity: 1 !important;
-    filter: alpha(opacity=100) !important;
-}
-.stepwizard-row:before {
-    top: 14px;
-    bottom: 0;
-    position: absolute;
-    content: " ";
-    width: 100%;
-    height: 1px;
-    background-color: #ccc;
-    z-order: 0;
-}
-.stepwizard-step {
-    display: table-cell;
-    text-align: center;
-    position: relative;
-}
-.btn-circle {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    padding: 6px 0;
-    font-size: 12px;
-    line-height: 1.428571429;
-    border-radius: 15px;
-}
-</style>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-function popUp()
-{
-var popupWindow = window.open('addetails1.php','User','resizable=yes,scrollbars=yes,width=650,height=550');
-    popupWindow.selectField=value;
-    // Now, you can access the value as window.selectField within admin_upgrade_user.php page
-    popupWindow.focus();
+$(document).ready(function(){
+$('#btnSubmit').click(function(){
+$(".inner").append("<div id='new' class='new'><form><div class='form-group'><label class='control-label'>Institute Name</label><input maxlength='200' type='text' class='form-control'id='institute' name='institute[]' placeholder='Enter institute Name' /></div><div class='form-group'><label class='control-label'>Degree</label><input maxlength='200' type='text' name='degree[]' id='degree' class='form-control' placeholder='Enter Degree'  /></div><div class='form-group'><label class='control-label'>From</label><input type='month' id='from' name='from' class='form-control'/><label class='control-label'>To</label><input type='month' id='to' name='to' class='form-control' /></div><div class='form-group'><label class='control-label'>Course Type</label><select class='form-control' id='coursetype' name='coursetype'><option>Full time</option><option>Part Time</option><option>Distance Learning</option></select></div><input id = 'btnSubmit' type='button' value='Add'/><button  class='delete'>Delete</button></form> </div>");
+});
+$('#btnRemove').click(function(){
+$(".new").remove();
+});
 
-}
+});
+$(document).ready(function(){
+$('#btnSub').click(function(){
+$(".outer").append("<div id='new1' class='new1'><form><div class='form-group'><label class='control-label'>Designation</label><input maxlength='200' type='text'  class='form-control' id='designation' name='designation' placeholder='Enter Designation' /></div><div class='form-group'><label class='control-label'>Organization</label><input maxlength='200' type='text' id='org' name='org' class='form-control' placeholder='Enter Degree'  /></div><div class='form-group'><label class='control-label'>From</label><input type='month' id class='form-control'/><label class='control-label'>To</label><input type='month' class='form-control' /></div></form></div>");
+});
+$('#btnRem').click(function(){
+  $(".new1").remove();
+});
+}); 
 
  
   $(document).ready(function () {
@@ -102,7 +67,50 @@ var popupWindow = window.open('addetails1.php','User','resizable=yes,scrollbars=
 });
 
   </script>
-
+<style type="text/css">
+body {
+    margin-top:40px;
+}
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 50%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -121,11 +129,14 @@ var popupWindow = window.open('addetails1.php','User','resizable=yes,scrollbars=
         <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
         <p>Professional Detail</p>
       </div>
-
+      <div class="stepwizard-step">
+        <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+        <p>Uploads</p>
+      </div>
     </div>
   </div>
   
-  <form action="" method="post" enctype="multipart/form-data">
+  <form role="form" action="edituser.php" method="post" >
     <div class="row setup-content" id="step-1">
       <div class="col-xs-6 col-md-offset-3">
         <div class="col-md-12">
@@ -158,19 +169,6 @@ var popupWindow = window.open('addetails1.php','User','resizable=yes,scrollbars=
             <option>Female</option>
             </select>
           </div>
-          
-              <div>
-          <button class="btn btn-primary nextBtn btn-lg pull-right" value="Next" >Next</button></div>
-        </div>
-      </div>
-    </div>
-    <div class="row setup-content" id="step-2">
-      <div class="col-xs-6 col-md-offset-3">
-        <div class="col-md-12">
-          <h3> Step 2</h3>
-           
-            
-              
           <div class="form-group">
             <label class="col-md-4 col-sm-4 control-label" style="padding-left:0;">Experience</label>
             <div class="col-md-3 col-sm-3 pd10" >
@@ -273,22 +271,91 @@ var popupWindow = window.open('addetails1.php','User','resizable=yes,scrollbars=
                 11            </option>
                 </select>
               </div>
+            </div>
+              <div>
+          <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit" >Next</button></div>
         </div>
-        <div>
-<button type="button" onclick="popUp();" class="btn btn-lg btn-border" >Add More</button>
-</div>
+      </div>
+    </div>
+    <div class="row setup-content" id="step-2">
+      <div class="col-xs-6 col-md-offset-3">
+        <div class="col-md-12">
+          <h3> Step 2</h3>
+           
+            <div id="container1" class="inner">
+              <form method="post" action="">
+          <div class="form-group">
+            <label class="control-label">Institute Name</label>
+            <input maxlength="200" type="text" required="required" class="form-control" id="institute" name="institute" placeholder="Enter institute Name" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Degree</label>
+            <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Degree"  />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Course Type</label>
+                       
+            <select class="form-control" id="coursetype" name="coursetype">
+            <option>Full time</option>
+            <option>Part Time</option>
+            <option>Distance Learning</option>
+            </select>
+          </div>
+           <div class="form-group">
+            <label class="control-label">From</label>
+            <input type='month' class='form-control' id="from" name="from" />
+            <label class="control-label">To</label>
+            <input type='month' class='form-control' id="to" name="to" />
+          </div>
+        
+
+ <input id = "btnSubmit" type="button" value="Add"/>
+<input id = "btnRemove" type="button" value="Delete"/>
  
- <div>
+ 
  <!--<input type="submit" name="submit_val1" class="btn btn-default btn-xs"  value="Submit" />-->
  <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
 </div>
+
+
+        </div>
       </div>
     </div>
-  </div>
     <div class="row setup-content" id="step-3">
       <div class="col-xs-6 col-md-offset-3">
         <div class="col-md-12">
           <h3>Step 3</h3>
+          <div id="container2" class="outer">
+          <div class="form-group">
+            <label class="control-label">Designation</label>
+            <input maxlength="200" type="text" required="required" class="form-control" id="designation" name="designation[]" placeholder="Enter Designation" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Organization</label>
+            <input maxlength="200" type="text" required="required" id="org" name="org[]" class="form-control" placeholder="Enter Organization"  />
+          </div>
+           <div class="form-group">
+            <label class="control-label">From</label>
+            <input type="month" required="required" name="from[]" id class="form-control"/>
+            <label class="control-label">To</label>
+            <input type="month" required="required" name="to[]" class="form-control" />
+          </div>
+ <input id = "btnSub" type="button" value="Add"/>
+<input id = "btnRem" type="button" value="Add"/>
+ 
+ 
+ <!--<input type="submit" name="submit_val1" class="btn btn-default btn-xs"  value="Submit" />-->
+ <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+</div>
+
+          <!--<button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>-->
+        </div>
+      </div>
+    </div>
+ <div class="row setup-content" id="step-4">
+      <div class="col-xs-6 col-md-offset-3">
+        <div class="col-md-12">
+          <h3>Step 4</h3>
           <div id="container2" class="outer">
           <div class="form-group">
             <label class="control-label">Upload your Resume/CV(.docx or PDF formats only)</label>
@@ -301,24 +368,13 @@ var popupWindow = window.open('addetails1.php','User','resizable=yes,scrollbars=
             <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
             <input name="userfile" type="file" id="userfile"> 
             <input name="upload" type="submit" class="box" id="upload" value=" Upload ">
+          </div>  
+          <button class="btn btn-success btn-lg pull-right" type="submit" name="submit" id="submit">Submit</button>
           </div>
           </div>
-
-          <button class="btn btn-success btn-lg pull-right" type="submit" name="submit">Submit</button>
-          
-          <!--<input onclick="popUp();" type="submit" class="btn btn-lg btn-border" value="Add more">-->
- 
- 
- 
- <!--<input type="submit" name="submit_val1" class="btn btn-default btn-xs"  value="Submit" />-->
- 
-
-          <!--<button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>-->
-        </div>
-      </div>
-    </div>
-
+          </div>
+          </div>
   </form> 
-
+</div>
 </body>
 </html>

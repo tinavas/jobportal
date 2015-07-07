@@ -34,7 +34,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Profile<span class="sr-only">(current)</span></a></li>
         <li><a href="viewuserprofile.php">Edit</a></li>
-        <li><a href="#">Take Test</a></li>
+        <li><a href="test_credentials1.php">Take Test</a></li>
        <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

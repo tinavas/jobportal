@@ -1,0 +1,20 @@
+<html>
+<head>
+<script>
+<form action="addedu.php" onsubmit="return closeSelf(this);" method="post" enctype="multipart/form-data"  name="certform">
+    <div>Certificate 1: <input type="file" name="cert1"/></div>
+    <div>Certificate 2: <input type="file" name="cert2"/></div>
+    <div>Certificate 3: <input type="file" name="cert3"/></div>
+
+    <div><input type="submit" value="Upload"/></div>
+</form>
+</script>
+</head>
+<form action="/system/wpacert" onsubmit="return closeSelf(this);" method="post" enctype="multipart/form-data"  name="certform">
+    <div>Certificate 1: <input type="file" name="cert1"/></div>
+    <div>Certificate 2: <input type="file" name="cert2"/></div>
+    <div>Certificate 3: <input type="file" name="cert3"/></div>
+
+    <div><input type="submit" value="Upload"/></div>
+</form>
+</html>

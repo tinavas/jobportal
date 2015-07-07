@@ -1,4 +1,4 @@
-<!--<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
 <table width="350" border="0" cellpadding="1" cellspacing="1" class="box">
 <tr> 
 <td width="246">
@@ -9,7 +9,6 @@
 </tr>
 </table>
 </form>
--->
 <?php
   session_start();
   // If the session vars aren't set, try to set them with a cookie
