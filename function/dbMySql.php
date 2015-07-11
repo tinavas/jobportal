@@ -1,13 +1,13 @@
 <?php
-define('DB_SERVER','76.162.254.151');
-define('DB_USER','A881420_jobp');
-define('DB_PASS' ,'');
-define('DB_NAME', 'A881420_jobp');
+//define('DB_SERVER','76.162.254.151');
+//define('DB_USER','A881420_jobp');
+//define('DB_PASS' ,'');
+//define('DB_NAME', 'A881420_jobp');
 
-//define('DB_SERVER','localhost');
-//define('DB_USER','root');
-//define('DB_PASS' ,'suryasurya');
-//define('DB_NAME', 'jobportal');
+define('DB_SERVER','localhost');
+define('DB_USER','root');
+define('DB_PASS' ,'zxcv');
+define('DB_NAME', 'jobseeker');
 
 class DB_con
 {
@@ -35,13 +35,32 @@ class DB_con
   return $restest;
  }
  
+ public function insertquestion($cat_id,$subcat_id,$question,$ans1,$ans2,$ans3,$ans4,$correct_ans,$test_date,$test_time, $status, $difficulty_level)
+ {
+  $resquestion = mysql_query("INSERT question VALUES('','$cat_id','$subcat_id','$question','$ans1','$ans2','$ans3','$ans4','$correct_ans','$difficulty_level')");
+  return $resquestion;
+ }
  
   public function insertcreatemaster($cat_id,$subcat_id,$start_date,$end_date,$test_duration,$create_status)
  {
   $rescreatemaster = mysql_query("INSERT create_qus_master VALUES('','$cat_id','$subcat_id','$start_date','$end_date','$test_duration','$create_status')");
   return $rescreatemaster;
  }
- 
+ public function selectques($cat,$sub_cat,$level)
+ {
+   $r="select * from test where cat_id='$cat' and subcat_id='$sub_cat' and difficulty_level='$level'";
+   //echo $r;
+     $res=mysql_query($r);
+     
+   //die();
+   return $res;
+   
+ }
+  public function selectquestion()
+ {
+  $resquestion=mysql_query("SELECT * FROM question");
+  return $resquestion;
+ }
  
  public function select()
  {

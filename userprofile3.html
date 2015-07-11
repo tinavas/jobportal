@@ -61,23 +61,23 @@ function popUp()
 {
 var popupWindow = window.open('addetails1.php','User','resizable=yes,scrollbars=yes,width=650,height=550');
    
-    // Now, you can access the value as window.selectField within admin_upgrade_user.php page
+    
     popupWindow.focus();
 
 }
 function popUp1()
 {
-var popupWindow = window.open('uploadpdf.php','User','resizable=yes,scrollbars=yes,width=650,height=550');
+var popupWindow = window.open('cvuploadshow.php','User','resizable=yes,scrollbars=yes,width=650,height=550');
    
-    // Now, you can access the value as window.selectField within admin_upgrade_user.php page
+    
     popupWindow.focus();
 
 }
 function popUp2()
 {
-var popupWindow = window.open('upload_pic.php','User','resizable=yes,scrollbars=yes,width=650,height=550');
+var popupWindow = window.open('imguploadshow.php','User','resizable=yes,scrollbars=yes,width=650,height=550');
    
-    // Now, you can access the value as window.selectField within admin_upgrade_user.php page
+    
     popupWindow.focus();
 
 }
@@ -133,15 +133,15 @@ $(document).ready(function () {
     <div class="stepwizard-row setup-panel">
         <div class="stepwizard-step">
             <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-            <p>Step 1</p>
+            <p>Basic Details</p>
         </div>
         <div class="stepwizard-step">
             <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-            <p>Step 2</p>
+            <p>Educational and Professional Details</p>
         </div>
         <div class="stepwizard-step">
             <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-            <p>Step 3</p>
+            <p>Upload</p>
         </div>
     </div>
 </div>
@@ -160,7 +160,8 @@ $(document).ready(function () {
           </div>
           <div class="form-group">
             <label class="control-label">Phone</label>
-            <input maxlength="100" type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" />
+            <!--<input type="tel" pattern="[0-9]{10}" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" />-->
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone Number" />
           </div>
           <div class="form-group">
             <label class="control-label">Date of Birth</label>
@@ -168,7 +169,16 @@ $(document).ready(function () {
           </div>
           <div class="form-group">
             <label class="control-label">Current Location</label>
-            <input maxlength="100" type="text" class="form-control" id="city" name="city" placeholder="Enter Current Location" />
+            <!--<input maxlength="100" type="text" class="form-control" id="city" name="city" placeholder="Enter Current Location" />-->
+            <select class="form-control" id="city" name="city">
+            <option></option>
+            <option>Delhi-NCR</option>
+            <option>Mumbai</option>
+            <option>Chennai</option>
+            <option>Kolkata</option>
+            <option>Hyderabad</option>
+            <option>Pune</option>
+            </select>
           </div>
           <div class="form-group">
             <label class="control-label">Gender</label>
@@ -176,7 +186,32 @@ $(document).ready(function () {
             <option>Male</option>
             <option>Female</option>
             </select>
-          </div>
+          </div><div class="form-group">
+            <label class="control-label">Skills Category</label>
+            <select class="form-control" id="category" name="category">
+            <option></option>
+            <option>Category1</option>
+            <option>Category2</option>
+            <option>Category3</option>
+            </select>
+        </div>
+          <div class="form-group">
+            <label class="control-label">Skills SubCategory</label>
+            <select class="form-control" id="subcategory" name="subcategory">
+            <option></option>
+            <option>SubCat1</option>
+            <option>SubCat2</option>
+            <option>SubCat3</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Skills SubSubCategory</label>
+            <select class="form-control" id="=subsub" name="subsub">
+            <option></option>
+            <option>SubSubCat1</option>
+            <option>SubSubCat2</option>
+            </select>
+        </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
             </div>
         </div>
@@ -288,6 +323,7 @@ $(document).ready(function () {
                 </select>
               </div>
         </div>
+        
                 <button type="button" onclick="popUp();" class="btn btn-lg btn-border" >Add More</button>
                 <!--<input onclick="popUp();" type="submit" class="btn btn-lg btn-border" value="Add more">-->
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
@@ -303,13 +339,13 @@ $(document).ready(function () {
             <!--<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
             <input name="userfile" type="file" id="userfile"> 
             <input name="upload" type="submit" class="box" id="upload" value=" Upload ">-->
-            <button type="button" onclick="popUp1();" class="btn btn-sm btn-border" id="upload" name="upload">Upload</button>
+            <button type="button" onclick="popUp1();" class="btn btn-sm btn-border" id="upload" name="upload">Upload </button>
           </div>  
           <div class="form-group">
             <label class="control-label">Upload your Profile Picture(PNG/JPEG only)</label>
             <!--<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
             <input name="userfile" type="file" id="userfile"> -->
-            <button type="button" onclick="popUp2();" class="btn btn-sm btn-border" id="upload" name="upload">Upload CV</button>
+            <button type="button" onclick="popUp2();" class="btn btn-sm btn-border" id="upload" name="upload">Upload</button>
             <!--<input name="upload" type="submit" class="box" id="upload" value=" Upload ">-->
           </div>
           </div>
@@ -318,6 +354,24 @@ $(document).ready(function () {
         </div>
     </div>
 </form>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+$( '#phone' ).change(function(){
+var sval=$(this).val();
+var phoneformat = /^\+[0-9][0-9]\-[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+if(sval.match(phoneformat))
+{
+return true;
+}
+else
+{
+alert("Invalid format. Please enter as +99-9999999999");
+return false;
+}
+    /*alert( "Handler for .change() called." );*/
+});
+</script>-->
+
 </div>
 </body>
 </html>

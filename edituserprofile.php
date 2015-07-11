@@ -21,12 +21,12 @@ require_once('uploadvars.php');
 
   // Connect to the database
   $dbc = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die(mysql_error());
-  echo "ok";
+  //echo "ok";
   mysql_select_db(DB_NAME);
-echo "good";
+//echo "good";
   if (isset($_POST['submit'])) 
   {
-    echo "v good";
+    //echo "v good";
     // Grab the profile data from the POST
     $first_name = mysql_real_escape_string(trim($_POST['firstname']),$dbc);
     $last_name = mysql_real_escape_string(trim($_POST['lastname']),$dbc);
@@ -36,6 +36,9 @@ echo "good";
     $currentloc=mysql_real_escape_string(trim($_POST['city']),$dbc);
     $expyear=mysql_real_escape_string(trim($_POST['expyear']),$dbc);
     $expmonth=mysql_real_escape_string(trim($_POST['expmonth']),$dbc);
+    $category=mysql_real_escape_string(trim($_POST['category']),$dbc);
+    $subcategory=mysql_real_escape_string(trim($_POST['subcategory']),$dbc);
+    $subsub=mysql_real_escape_string(trim($_POST['subsub']),$dbc);
     
     //$new_picture = mysql_real_escape_string(trim($_FILES['new_picture']['name']),$dbc);
    // $new_picture_type = $_FILES['new_picture']['type'];
@@ -54,7 +57,7 @@ echo "good";
      // if (!empty($first_name) && !empty($last_name) && !empty($gender) && !empty($birthdate) && !empty($level)) {
         
           $query = "UPDATE register_emp SET firstname = '$first_name', lastname = '$last_name', gender = '$gender', " .
-            " birthdate = '$birthdate',city='$currentloc',phone='$phone',expyear='$expyear',expmonth='$expmonth' WHERE ID = '" . $_SESSION['ID'] . "'";
+            " birthdate = '$birthdate',city='$currentloc',phone='$phone',expyear='$expyear',expmonth='$expmonth',category='$category',subcategory='$subcategory',subsubcategory='$subsub' WHERE ID = '" . $_SESSION['ID'] . "'";
         
        // else echo 'FIll all fields';
        
@@ -62,15 +65,15 @@ echo "good";
 
         // Confirm success with the user
        // echo '<p>Your profile has been successfully updated.<a href="viewprofile.php">view your profile</a> or <a href="addedu.php">add educational details</a></p>';
-        //echo '<script type="text/javascript">
-          // window.location = "edudetails.php"
-     // </script>';
+        echo '<script type="text/javascript">
+         window.location = "finaluserprofile.php"
+     </script>';
 
         mysql_close();
         exit();
       }
       else {
-        echo '<p class="error">You must enter all of the profile data (the picture is optional).</p>';
+        //echo '<p class="error">You must enter all of the profile data (the picture is optional).</p>';
       }
 
   } // End of check for form submission
@@ -93,7 +96,7 @@ else {
       $expmonth=$row['expmonth'];
     }
     else {
-      echo '<p class="error">There was a problem accessing your profile.</p>';
+      //echo '<p class="error">There was a problem accessing your profile.</p>';
     }
   }
 

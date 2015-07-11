@@ -1,6 +1,18 @@
+<?php
+session_start();
+ // If the session vars aren't set, try to set them with a cookie
+  if (!isset($_SESSION['employerid'])) {
+    if (isset($_COOKIE['employerid']) && isset($_COOKIE[''])) {
+      $_SESSION['employerid'] = $_COOKIE['employerid'];
+      $_SESSION['co_email'] = $_COOKIE['co_email'];
+    }
+  }       
+require_once('connect.php');
+?>
 <html>
 <head>
- <title>Employer Dashboard</title>
+ <title>E
+ mployer Dashboard</title>
  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cosmo/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -36,21 +48,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php">Logout</a></li>
+        <li><a href="logoutemployer.php">Logout</a></li>
       </ul>
     </div>
   </div>
 </nav>
 <?php
-session_start();
- // If the session vars aren't set, try to set them with a cookie
-  if (!isset($_SESSION['employerid'])) {
-    if (isset($_COOKIE['employerid']) && isset($_COOKIE[''])) {
-      $_SESSION['employerid'] = $_COOKIE['employerid'];
-      $_SESSION['co_email'] = $_COOKIE['co_email'];
-    }
-  }       
-require_once('connect.php');
 if (!isset($_SESSION['employerid'])) {
     echo '<p class="login">Please <a href="employerstart.html">log in</a> to access this page.</p>';
     exit();
@@ -63,39 +66,39 @@ if (!isset($_SESSION['employerid'])) {
  mysql_select_db(DB_NAME);
 
   if (!isset($_GET['employerid'])) {
-    $query = "SELECT job_title,job_description,opening,industry,postdate,deadline FROM job WHERE employerid = '" . $_SESSION['employerid'] . "'";
+    $query = "SELECT jobid,job_title,opening,industry,postdate,deadline FROM job WHERE employerid = '" . $_SESSION['employerid'] . "'";
   }
   else {
-    $query = "SELECT job_title,job_description,opening,industry,postdate,deadline FROM job WHERE employerid = '" . $_GET['employerid'] . "'";
+    $query = "SELECT jobid,job_title,opening,industry,postdate,deadline FROM job WHERE employerid = '" . $_GET['employerid'] . "'";
   }
 //echo $query;
 $data = mysql_query($query,$dbc) or die(mysql_error());
 //echo $data;
 $numrows=mysql_num_rows($data);
 //echo $numrows;
-echo 'Jobs posted by you :';
-echo '<table>';
-    
-    echo '<tr>';
+echo '<center><h1>Jobs posted</h1>';
+?>
+<table>
+<?php    echo '<tr>';
     echo '<th>Job Title</th>';
-    echo '<th>Job Description</th>';
-    echo '<th>Opening</th>';
+    echo '<th>Openings</th>';
+  echo '<th>Status</th>';
     echo '<th>Industry</th>';
     echo '<th>Post Date</th>';
     echo '<th>deadline</th>';
     echo '</tr>';
 while($row=mysql_fetch_array($data)) {
     // The user row was found so display the user data
-    
+    $status="open";
     echo '<tr>';
     if (!empty($row['job_title'])) {
-      echo '<td>' . $row['job_title'] . '</td>&nbsp;';
-    }
-    if (!empty($row['job_description'])) {
-      echo '<td>' . $row['job_description'] . '</td>&nbsp;';
+      echo '<td><a href="recommendations.php?jobid='.$row['jobid'].'">' . $row['job_title'] . '</a></td>&nbsp;';
     }
     if (!empty($row['opening'])) {
       echo '<td>' . $row['opening'] . '</td>&nbsp;';
+    }
+  if (!empty($status)) {
+      echo '<td>' .$status . '</td>&nbsp;';
     }
     if (!empty($row['industry'])) {
       echo '<td>' . $row['industry'] . '</td>&nbsp;';
@@ -108,6 +111,7 @@ while($row=mysql_fetch_array($data)) {
     }
     echo '</tr>';
 }
+echo '</table></center>';
 ?>
 </body>
 </html>

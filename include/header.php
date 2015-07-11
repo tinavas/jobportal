@@ -12,7 +12,7 @@
                             <span class="caret"></span>
                         </div>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="logout.php">Log Out</a></li>
+                            <li><a href="logout_admin.php">Log Out</a></li>
                         </ul>
                     </div>
                    

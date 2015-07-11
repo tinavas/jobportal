@@ -1,4 +1,14 @@
+<?php
+  session_start();
 
+  // If the session vars aren't set, try to set them with a cookie
+  if (!isset($_SESSION['employerid'])) {
+    if (isset($_COOKIE['employerid']) && isset($_COOKIE['co_email'])) {
+     // $_SESSION['user_id'] = $_COOKIE['user_id'];
+      //$_SESSION['username'] = $_COOKIE['username'];
+    }
+  }
+?>
 <html>
 <head>
 <title>Post Job </title>
@@ -6,34 +16,6 @@
 <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
 <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cosmo/bootstrap.min.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script>
-
-$(document).on('click', '.input-remove-row', function(){ 
-    var tr = $(this).closest('tr');
-    tr.fadeOut(200, function(){
-    	tr.remove();
-	   
-	});
-});
-
-$(function(){
-    $('.preview-add-button').click(function(){
-        var form_data = {};
-        form_data["concept"] = $('.payment-form input[name="concept"]').val();
-        form_data["description"] = $('.payment-form input[name="description"]').text();
-        form_data["opening"] = $('.payment-form input[name="opening"]').val();
-        form_data["industry"] = $('.payment-form #industry option:selected').text();
-        form_data["pdate"] = $('.payment-form input[name="pdate"]').val();
-        form_data["ddate"] = $('.payment-form input[name="ddate"]').val();
-        form_data["remove-row"] = '<span class="glyphicon glyphicon-remove"></span>';
-        var row = $('<tr></tr>');
-        $.each(form_data, function( type, value ) {
-            $('<td class="input-'+type+'"></td>').html(value).appendTo(row);
-        });
-        $('.preview-table > tbody:last').append(row); 
-    });  
-});
-</script>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -47,7 +29,7 @@ $(function(){
       </button>
       <a class="navbar-brand" href="#">Brand</a>
     </div>
-
+   
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="employerprofile.php">Profile<span class="sr-only">(current)</span></a></li>
@@ -69,13 +51,19 @@ $(function(){
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php">Logout</a></li>
+        <li><a href="logoutemployer.php">Logout</a></li>
       </ul>
     </div>
   </div>
 </nav> 
-        
-      
+ <?php if (!isset($_SESSION['employerid'])) {
+    echo '<p class="login">Please <a href="employerstart.html">log in</a> to access this page.</p>';
+    exit();
+  }
+  else {
+    //echo('<p class="login">You are logged in as ' . $_SESSION['employerid'] . '. <a href="logoutemployer.php">Log out</a>.</p>');
+  }      
+ ?>     
 <form method="post" action="addjob.php">  
    <div class="container">
 	<div class="row">
@@ -130,7 +118,7 @@ $(function(){
                 </div>
             </div>            
         </div>
-        <button type="submit" id="submit" name="submit"class="btn btn-default preview-add-button"> Add</button>
+        <button type="submit" id="submit" name="submit"class="btn btn-default preview-add-button">Post</button>
         </form>                     <!-- / panel preview -->
         <!--<div class="col-sm-7">
             <h4>Preview:</h4>

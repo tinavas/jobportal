@@ -6,5 +6,5 @@
 
 
 mysql_connect('localhost', 'root', 'zxcv');
-mysql_select_db("jobportal");
+mysql_select_db("jobseeker");
 ?>

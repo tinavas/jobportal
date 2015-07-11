@@ -15,14 +15,26 @@ if (mysql_num_rows($data) == 0)
 //if unique username,then register
 $query1="INSERT into register_emp(firstname,lastname,email,password) VALUES('$firstname','$lastname','$email','$pass')";
 mysql_query($query1,$dbc) or die(mysql_error());
-
+    header('Location:finaluserprofile.php');
 	echo 'Successful registration!';
 }
 else
 { 
 // An account already exists for this username, so display an error message
-        echo '<p class="error">An account already exists for this username. Please use a different address.</p>';
-        
+        //echo '<p class="error">An account already exists for this username. Please use a different address.</p>';
+    echo '<script type="text/javascript">'
+   , 'setTimeout();'
+   , '</script>';
 }
 mysql_close();
 ?>
+<script type="text/javascript">
+setTimeout(function () {
+
+	alert('An account already exists for this user name!Please use another id');
+   window.location.href= 'index.html'; // the redirect goes here
+
+},5000); // 5 seconds
+
+
+</script>

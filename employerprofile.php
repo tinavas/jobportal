@@ -50,7 +50,7 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php">Logout</a></li>
+        <li><a href="logoutemployer.php">Logout</a></li>
       </ul>
     </div>
   </div>
@@ -65,16 +65,16 @@
     exit();
   }
   else {
-    echo('<p class="login">You are logged in as ' . $_SESSION['employerid'] . '. <a href="logoutemployer.php">Log out</a>.</p>');
+    //echo('<p class="login">You are logged in as ' . $_SESSION['employerid'] . '. <a href="logoutemployer.php">Log out</a>.</p>');
   }
   $dbc = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die(mysql_error());
 mysql_select_db(DB_NAME);
   // Grab the profile data from the database
   if (!isset($_GET['employerid'])) {
-    $query = "SELECT name, co_name,co_email,co_type,co_about,logo FROM employer WHERE employerid = '" . $_SESSION['employerid'] . "'";
+    $query = "SELECT name, co_name,co_email,co_type,co_about,emp_picture FROM employer WHERE employerid = '" . $_SESSION['employerid'] . "'";
   }
   else {
-    $query = "SELECT name, co_name,co_email,co_type,co_about,logo FROM employer WHERE employerid = '" . $_GET['employerid'] . "'";
+    $query = "SELECT name, co_name,co_email,co_type,co_about,emp_picture FROM employer WHERE employerid = '" . $_GET['employerid'] . "'";
   }
   $data = mysql_query($query,$dbc) or die(mysql_error());
  if (mysql_num_rows($data) == 1) {
@@ -90,7 +90,7 @@ mysql_select_db(DB_NAME);
         <?php
          //echo '<img src="' . MM_UPLOADPATH . $row['picture'] .
         //'" alt="Profile Picture" class="avatar img-circle img-thumbnail" alt="avatar" />';
-        echo '<img src="data:image/png;base64,' . base64_encode($row['logo']) . '"width="160" height="160"alt="Profile Picture" class="avatar img-circle img-thumbnail" alt="avatar" />';
+        echo '<img src="uploads/' . $row['emp_picture'] . '"width="160" height="160"alt="Profile Picture" class="avatar img-circle img-thumbnail" alt="avatar" />';
         ?>
       </div>
     </form>
@@ -98,7 +98,7 @@ mysql_select_db(DB_NAME);
    
     <!-- form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-      <h3>Personal info</h3>
+      <h3>Company info</h3>
       <form class="form-horizontal" role="form">
        
         <div class="form-group">

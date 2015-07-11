@@ -41,7 +41,7 @@ mysql_close();
 }
 else
 {
-echo"got it,already logged in";
-header('location: viewprofile.php');
+//echo"got it,already logged in";
+header('location: finaluserprofile.php');
 }
 ?>

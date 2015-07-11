@@ -22,12 +22,13 @@
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
-var counter = 0;
+
 $(function(){
+  var counter = 0;
  $('p#add_field').click(function(){
  counter += 1;
  $('#container').append(
- '<strong>Job.' + counter + '</strong><br />'
+ '<strong>Job'+ counter +'</strong><br />'
  + '<input id="field_' + counter + '" name="dynfields1[]' + '" type="text" /><br />' 
  +'<strong>From</strong><br/>'
  +'<input field=field_'+counter+'" name="dynfields1_from[]'+'"type="text"/><br/>'
@@ -36,8 +37,9 @@ $(function(){
  
  });
 });
-var counter = 0;
+
 $(function(){
+  var counter = 0;
  $('p#add_field1').click(function(){
  counter += 1;
  $('#container1').append(
@@ -53,8 +55,9 @@ $(function(){
  });
 });
 
-var counter = 0;
+
 $(function(){
+  var counter = 0;
  $('p#add_field2').click(function(){
  counter += 1;
  $('#container2').append(
@@ -221,7 +224,7 @@ mysql_close();
 ?>
 <?php if (!isset($_POST['submit_val'])) { ?>
  <h1>Add your previous experience:</h1>
- <form method="post" action="">
+ <form id='f' method="post" action="">
 
  <div id="container">
  <p id="add_field"><a href="#"><span>Click To Add Job Experience</span></a></p>
@@ -232,11 +235,17 @@ mysql_close();
  <div id="container2">
  <p id="add_field2"><a href="#"><span>Click To Add Certifications:</span></a></p>
  </div>
-<input type="submit" name="submit_val" class="btn btn-default btn-xs" value="Submit" />
+<input type="submit" name="submit_val" class="btn btn-default btn-xs" value="Submit" onclick="close_win();" />
  </form>
  <?php } ?>
  
-
+<script type='text/javascript'>
+function close_win()
+{
+  f.submit();
+window.close();
+}
+</script>
  <!--
  <input type="submit" name="submit_val1" class="btn btn-default btn-xs"  value="Submit" />-->
  
